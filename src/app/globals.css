@@ -3,31 +3,86 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --gray-800: rgb(37 40 44);
+    --purple-600: rgb(93,93,255);
+    --purple-700: rgb(75,74,207);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    grid-auto-flow: dense; /* Fill gaps more efficiently */
+    gap: 16px; /* No gap between items */
+  }
+  
+  .masonry-grid .short {
+    grid-row: span 1; /* Occupies one row */
+    height: auto; /* Adjust to content */
+  }
+  
+  .masonry-grid .long {
+    grid-row: span 2; /* Occupies two rows */
+    height: auto;
+  }
+  
+  /* Optional: if you want a bit of spacing between cards, you can add padding */
+  .masonry-grid > div {
+    box-sizing: border-box;
+  }
+  
+@media only screen and (max-width: 1020px) {
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 3 columns */
+    grid-auto-flow: dense; /* Fill gaps more efficiently */
+    gap: 16px;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@media only screen and (max-width: 540px) {
+  .masonry-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 3 columns */
+    grid-auto-flow: dense; /* Fill gaps more efficiently */
+    gap: 16px;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.heart {
+  position: absolute;
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #ff69b4;
+  transform: rotate(-45deg);
+  animation: float 6s ease-in infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -25px;
+  left: 0;
+}
+
+.heart::after {
+  left: 25px;
+  top: 0;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) scale(1) rotate(-45deg);
+  }
+  100% {
+    transform: translateY(-100vh) scale(1.5) rotate(-45deg);
   }
 }
