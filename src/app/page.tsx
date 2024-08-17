@@ -440,7 +440,6 @@ export default function Home() {
           </Twocols>
         </div>
       </div>
-      <div><div></div></div>
     </main>
   );
 }
