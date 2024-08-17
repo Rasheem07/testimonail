@@ -344,7 +344,7 @@ export default function Home() {
               </h3>
               <p className="text-lg text-zinc-300 font-sans mt-4">
                 You will have a simple & clean dashboard to manage all
-                testimonials in one place. It's like your email inbox, but
+                testimonials in one place. It&apos;s like your email inbox, but
                 it&apos;s designed for your social proof!
               </p>
               <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
