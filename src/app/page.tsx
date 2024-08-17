@@ -1,13 +1,16 @@
 "use client";
+import Call_to_actions from "@/components/features";
 import CardStack from "@/components/cardstack";
 import Code from "@/components/code";
 import Logo from "@/components/logo";
 import Playbtn from "@/components/ui/playbtn";
 import Twocols from "@/components/wrappers/twoCols";
-import { ArrowRightIcon, Copy, Play } from "lucide-react";
+import { ArrowRightIcon, CircleCheck, Copy, Play, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+import Features from "@/components/features";
+import PricingCta from "@/components/pricingcta";
 
 export default function Home() {
   const playbuttonref = useRef<HTMLButtonElement>(null);
@@ -45,7 +48,7 @@ export default function Home() {
     };
   }, []);
   return (
-    <main className="mx-auto w-full max-w-screen-xl px-2.5 md:px-20 pt-20">
+    <main className="mx-auto w-full max-w-screen-xl px-5 md:px-20 pt-20">
       <div className="max-w-4xl mx-auto text-center space-y-5 pb-16 mb-10 md:mb-0">
         <h1 className="text-4xl md:text-[52px] leading-[1.1] font-bold text-white">
           Get testimonials from your customers with ease
@@ -294,152 +297,150 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="py-16 w-full space-y-24">
-        <div className="max-w-4xl mx-auto text-center space-y-5">
-          <h1 className="text-4xl md:text-[52px] leading-[1.1] font-bold text-white">
-            Collect and display testimonials all in one solution
+
+      <Features />
+
+      <div className="py-24 space-y-16">
+        <div className="space-y-4 md:space-y-2 text-center max-w-4xl mx-auto">
+          <h1 className="text-[52px] leading-[1.1] font-bold text-white">
+            Integrate with any platform
           </h1>
+          <p className="text-zinc-400 text-xl md:text-xl">
+            We built the ultimate tool for showcasing your satisfied customers.
+            With 3-lines of HTML code, you can embed all your testimonials to
+            any platform!
+          </p>
         </div>
-        <div className="space-y-32">
-          <Twocols>
-            <div className="mb-8 md:mb-0">
-              <span className="text-purple-600 text-xl font-medium tracking-wide mb-2">
-                Quick to Setup
-              </span>
-              <h3 className="text-[2rem] font-semibold text-white mb-3">
-                A dedicated landing page
-              </h3>
-              <p className="text-lg text-zinc-300 font-sans mt-4">
-                Create a dedicated landing page for your business. Share the
-                page link easily via email, social media, or even SMS. Setup can
-                be done in two minutes.
-              </p>
-              <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
-                Try it for FREE
-              </button>
-            </div>
-            <Image
-              src="/landing-page.png"
-              alt=""
-              width={800}
-              height={597}
-              className=""
-            />
-          </Twocols>
 
-          <Twocols>
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-row gap-6">
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
             <Image
-              src="/Easy to manage.png"
+              src="/integrations logos/webflow.png"
               alt=""
-              width={800}
-              height={597}
-              className="mb-8 md:mb-0"
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
             />
-            <div className="">
-              <span className="text-purple-600 text-xl font-medium tracking-wide mb-2">
-                Easy to manage
-              </span>
-              <h3 className="text-[2rem] font-semibold text-white mb-3">
-                A dashboard to manage all testimonials
-              </h3>
-              <p className="text-lg text-zinc-300 font-sans mt-4">
-                You will have a simple & clean dashboard to manage all
-                testimonials in one place. It&apos;s like your email inbox, but
-                it&apos;s designed for your social proof!
-              </p>
-              <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
-                Try it for FREE
-              </button>
-            </div>
-          </Twocols>
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/shopify.png"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/carrd.png"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/wordpress.png"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/kajabi.svg"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/bubble.svg"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/framer.png"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain"
+            />
+          </div>
+          <div className="rounded-lg shadow-md bg-zinc-100 py-4 px-6 flex items-center justify-center">
+            <Image
+              src="/integrations logos/squarespace.jpeg"
+              alt=""
+              width={809}
+              height={204}
+              className="w-44 h-10 max-w-full object-contain mix-blend-multiply"
+            />
+          </div>
+        </div>
 
-          <Twocols>
-            <div className="mb-8 md:mb-0">
-              <span className="text-purple-600 text-xl font-medium tracking-wide mb-2">
-                Track the metrics
-              </span>
-              <h3 className="text-[2rem] font-semibold text-white mb-3">
-                Understand how video testimonials are performing
-              </h3>
-              <p className="text-lg text-zinc-300 font-sans mt-4">
-                Track the metrics from all embedded videos, help your marketing
-                team understand the performance at a glance, even promote the
-                best-performing videos to different marketing channels.
-              </p>
-              <p className="text-sm text-gray-400 mt-2">
-                * Available in the Ultimate plan
-              </p>
-              <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
-                Try it for FREE
-              </button>
-            </div>
-            <Image
-              src="/metrics.png"
-              alt=""
-              width={800}
-              height={597}
-              className=""
-            />
-          </Twocols>
+        <p className="text-zinc-200 font-medium tracking-wide text-lg underline underline-offset-2 cursor-pointer mx-auto text-center">
+          ✨ See all 100+ integrations
+        </p>
+      </div>
 
-          <Twocols>
-            <Image
-              src="/more-social-proof.png"
-              alt=""
-              width={800}
-              height={597}
-              className="mb-8 md:mb-0"
-            />
-            <div className="">
-              <span className="text-purple-600 text-xl font-medium tracking-wide mb-2">
-                More social proof
-              </span>
-              <h3 className="text-[2rem] font-semibold text-white mb-3">
-                Not only text and video testimonials
-              </h3>
-              <p className="text-lg text-zinc-300 font-sans mt-4">
-                If you have testimonials on social media (e.g. Twitter,
-                LinkedIn, TikTok etc), video hosting platforms (e.g. YouTube,
-                Vimeo), and other review sites (e.g. G2, Google, Capterra, Yelp
-                etc), bring them all to your account. Testimonial helps you
-                manage all your social proof in a single place!
-              </p>
-              <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
-                Try it for FREE
-              </button>
-            </div>
-          </Twocols>
+      <div className="bg-[#FFFBEB] rounded-lg shadow-md py-14 px-4 md:px-12 w-full space-y-8 relative">
+        <div className="flex items-center gap-1.5">
+          <Star className="h-5 w-5 text-purple-600 fill-purple-600" />
+          <Star className="h-5 w-5 text-purple-600 fill-purple-600" />
+          <Star className="h-5 w-5 text-purple-600 fill-purple-600" />
+          <Star className="h-5 w-5 text-purple-600 fill-purple-600" />
+          <Star className="h-5 w-5 text-purple-600 fill-purple-600" />
+        </div>
+        <p className="text-xl md:text-2xl font-bold text-gray-900">
+          We embedded Testimonial.to on the last page of our Prehireforms
+          (candidates&apos; skills assessment forms) and candidates&apos;
+          testimonials started coming in automatically! Testimonials collection
+          is now automated and we don&apos;t need to ask customers or candidates
+          to drop us testimonials anymore!
+        </p>
 
-          <Twocols>
-            <div className="mb-8 md:mb-0">
-              <span className="text-purple-600 text-xl font-medium tracking-wide mb-2">
-                Embed the Wall of Love
-              </span>
-              <h3 className="text-[2rem] font-semibold text-white mb-3">
-                The best testimonials all in one place
-              </h3>
-              <p className="text-lg text-zinc-300 font-sans mt-4">
-                Treat the Wall of Love as the place to showcase all your
-                favorite testimonials. You can embed it to your website in under
-                a minute. No coding knowledge required!
-              </p>
-              <p className="text-lg font-semibold text-zinc-200 mt-2 underline underline-offset-1">
-                See our Wall of Love in action 👉
-              </p>
-              <button className="rounded-md bg-purple-600 text-white shadow-md py-2 px-4 mt-6">
-                Try it for FREE
-              </button>
-            </div>
-            <Image
-              src="/wall-of-love.png"
-              alt=""
-              width={800}
-              height={597}
-              className=""
-            />
-          </Twocols>
+        <div className="flex gap-2.5 md:gap-4 items-center">
+          <Image
+            src="/avatars/kamLing"
+            alt=""
+            height={75}
+            width={75}
+            className="object-cover  shadow-inner rounded-full"
+          />
+          <div className="space-y-0.5">
+            <h4 className="text-2xl font-semibold text-gray-900 capitalize">
+              Kam ling
+            </h4>
+            <p className="text-base md:text-lg font-medium text-gray-800">
+              CO founder of prehireforms.com
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center font-medium text-base absolute bottom-2 right-5">
+          <Image
+            src="/just-logo.svg"
+            alt=""
+            height={30}
+            width={30}
+            className="object-cover  shadow-inner rounded-full"
+          />
+          Testimonail.io
         </div>
       </div>
+
+      <PricingCta />
+
+      
     </main>
   );
 }

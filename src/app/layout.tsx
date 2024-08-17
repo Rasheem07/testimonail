@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/NavBar";
 import Head from "next/head";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body className={cn(inter.className, "bg-[rgb(21,23,25)] antialiased")}>
         <NavBar />
         {children}
+        <Footer />
       </body>
     </html>
   );
