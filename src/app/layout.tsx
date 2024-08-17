@@ -28,6 +28,7 @@ export default function RootLayout({
         />
       </Head>
       <body className={cn(inter.className, "bg-[rgb(21,23,25)] antialiased")}>
+        <div className="z-10 overlay bg-gray-800 opacity-75 fixed inset-x-0 inset-y-0 hidden transition duration-200 ease-in" />
         <NavBar />
         {children}
         <Footer />

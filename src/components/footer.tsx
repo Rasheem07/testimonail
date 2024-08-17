@@ -117,7 +117,7 @@ export default function Footer() {
               Latest video
             </h6>
             <Image
-              src="/lastest-video.avif"
+              src="/lastest-video.png"
               alt=""
               height={100}
               width={150}
