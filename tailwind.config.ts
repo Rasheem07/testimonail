@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "purple-100": "var(--purple-100)",
         "gray-800": "var(--gray-800)",
         "purple-600": "var(--purple-600)",
         "purple-700": "var(--purple-700)",

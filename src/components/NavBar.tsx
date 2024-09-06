@@ -11,6 +11,7 @@ import {
   User,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 export default function NavBar() {
@@ -98,12 +99,12 @@ export default function NavBar() {
         </li>
       </ul>
       <div className="hidden md:flex items-center gap-8">
-        <button className="bg-transparent h-full font-medium text-base font-sans text-zinc-100 hover:text-gray-300">
+        <Link href='/login' className="bg-transparent h-full font-medium text-base font-sans text-zinc-100 hover:text-gray-300">
           Sign in
-        </button>
-        <button className="bg-purple-600 rounded-sm shadow-md h-full font-medium text-base font-sans text-zinc-100 hover:bg-purple-700 hover:blur-[0.1px] py-2 px-4">
+        </Link>
+        <Link href='/signup' className="bg-purple-600 rounded-sm shadow-md h-full font-medium text-base font-sans text-zinc-100 hover:bg-purple-700 hover:blur-[0.1px] py-2 px-4">
           Sign up
-        </button>
+        </Link>
       </div>
       <button onClick={handleSideMenu} className="transition duration-1000 ease md:hidden z-50">
         {!IsSideBar ? (
@@ -113,7 +114,7 @@ export default function NavBar() {
         )}
       </button>
       {IsSideBar && (
-        <div className="absolute inset-x-0 top-full bg-gray-800 m z-10 py-6 pr-4 pl-8 space-y-8">
+        <div className="absolute shadow-md inset-x-0 top-full bg-gray-800 m z-10 py-6 pr-4 pl-8 space-y-8">
           <ul className="md:hidden flex flex-col items-start gap-6 list-none">
             <li className="text-base text-zinc-100 hover:text-gray-300 font-semibold capitalize relative">
               <button

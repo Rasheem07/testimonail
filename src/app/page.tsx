@@ -5,16 +5,30 @@ import Code from "@/components/code";
 import Logo from "@/components/logo";
 import Playbtn from "@/components/ui/playbtn";
 import Twocols from "@/components/wrappers/twoCols";
-import { ArrowRightIcon, CircleCheck, Copy, Play, Star } from "lucide-react";
+import {
+  ArrowRightIcon,
+  ChevronRight,
+  CircleCheck,
+  Copy,
+  HelpCircle,
+  HomeIcon,
+  MessageCircle,
+  MessageSquare,
+  Play,
+  Search,
+  Star,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Features from "@/components/features";
 import PricingCta from "@/components/pricingcta";
+import { Chatbot } from "@/components/chatbot";
 
 export default function Home() {
   const playbuttonref = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [chatbot, setchatbot] = useState(false);
 
   const playVideoOnclickPlaybtn = () => {
     if (videoRef.current?.paused) {
@@ -47,6 +61,11 @@ export default function Home() {
       videoElement?.removeEventListener("pause", handlePause);
     };
   }, []);
+
+  const openChatbot = () => {
+    setchatbot(true);
+  }
+
   return (
     <main className="mx-auto w-full max-w-screen-xl px-5 md:px-20 pt-20">
       <div className="max-w-4xl mx-auto text-center space-y-5 pb-16 mb-10 md:mb-0">
@@ -63,7 +82,7 @@ export default function Home() {
             <button className="px-6 py-3 rounded-lg shadow-md text-base font-semibold text-white bg-purple-600 w-full max-w-fit hover:scale-105">
               Try FREE now
             </button>
-            <button className="px-6 py-3 rounded-lg shadow-inner border border-purple-600 text-base font-semibold text-white w-full flex items-center gap-2 max-w-fit hover:scale-105">
+            <button onClick={openChatbot} className="px-6 py-3 rounded-lg shadow-inner border border-purple-600 text-base font-semibold text-white w-full flex items-center gap-2 max-w-fit hover:scale-105">
               Talk to Us{" "}
               <div className="hidden md:flex items-center -space-x-1.5">
                 <Image
@@ -440,7 +459,7 @@ export default function Home() {
 
       <PricingCta />
 
-      
+      <Chatbot chatbot={chatbot} setchatbot={setchatbot} />
     </main>
   );
 }
