@@ -48,7 +48,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ chatbot, setchatbot }) => {
         <div
           className={`chatbot h-full ${
             chatbot ? "" : "hidden"
-          } ease-in-out duration-[1s] transition animate-[pulse 2s ease] min-w-[80vw] md:max-w-[30vw] md:min-w-[30vw] bg-white rounded-xl shadow-xl relative mr-4`}
+          } ease-in-out duration-[1.2s] transition animate-[pulse 2s ease] min-w-[85vw] max-w-[85vw] md:max-w-[30vw] md:min-w-[30vw] bg-white rounded-xl shadow-xl relative mr-4`}
         >
           {page === "home" ? (
             <Home setpage={setpage} />
