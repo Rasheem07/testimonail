@@ -39,6 +39,22 @@ export default function Home() {
   };
 
   useEffect(() => {
+      (async () => {
+        try {
+          const response = await fetch("http://localhost:8080/get/csrf-token", {
+            method: "GET",
+            credentials: 'include', // Ensure cookies are included with the request
+          });
+  
+          if (!response.ok) {
+            throw new Error('Failed to fetch CSRF token');
+          }
+  
+        } catch (error) {
+          console.error('Error fetching CSRF token:', error);
+        }
+      })();
+
     const handlePlay = () => {
       if (playbuttonref.current) {
         playbuttonref.current.style.display = "none";
@@ -64,7 +80,7 @@ export default function Home() {
 
   const openChatbot = () => {
     setchatbot(true);
-  }
+  };
 
   return (
     <main className="mx-auto w-full max-w-screen-xl px-5 md:px-20 pt-20">
@@ -82,7 +98,10 @@ export default function Home() {
             <button className="px-6 py-3 rounded-lg shadow-md text-base font-semibold text-white bg-purple-600 w-full max-w-fit hover:scale-105">
               Try FREE now
             </button>
-            <button onClick={openChatbot} className="px-6 py-3 rounded-lg shadow-inner border border-purple-600 text-base font-semibold text-white w-full flex items-center gap-2 max-w-fit hover:scale-105">
+            <button
+              onClick={openChatbot}
+              className="px-6 py-3 rounded-lg shadow-inner border border-purple-600 text-base font-semibold text-white w-full flex items-center gap-2 max-w-fit hover:scale-105"
+            >
               Talk to Us{" "}
               <div className="hidden md:flex items-center -space-x-1.5">
                 <Image

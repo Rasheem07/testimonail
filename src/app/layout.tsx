@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/toaster"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         <div className="z-10 overlay bg-gray-800 opacity-75 fixed inset-x-0 inset-y-0 hidden blur-md  transition duration-200 ease-in" />
         <NavBar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
