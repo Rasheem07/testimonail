@@ -1,8 +1,10 @@
 "use client";
 import { getCookies } from "@/helpers/getCookies";
 import { useToast } from "@/hooks/use-toast";
+import { sendOTP } from "@/services/sendOTP";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 
 interface Errortype {
@@ -11,7 +13,7 @@ interface Errortype {
 }
 
 export default function Page() {
-
+  const router = useRouter();
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     email: "",
@@ -19,7 +21,8 @@ export default function Page() {
   });
   const [errors, setErrors] = useState({ type: "", error: "" });
   const [message, setmessage] = useState("");
-  
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     if (errors && errors.error) {
       toast({
@@ -47,7 +50,7 @@ export default function Page() {
     const cookies = getCookies();
     console.log(cookies); // Add this line
     try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +68,17 @@ export default function Page() {
         setErrors({ type: data.type, error: data.error });
         return;
       }
+      setIsLoading(false);
+      router.push(`/signup/otp?email=${formData.email.toString()}`);
 
+      const OTPresponse = await sendOTP(formData.email.trim());
+
+      if (OTPresponse.error) {
+        toast({
+          description: OTPresponse.error,
+          variant: "destructive",
+        });
+      }
       setmessage(data.message);
       setFormData({
         email: "",
@@ -76,25 +89,18 @@ export default function Page() {
       console.error("Network or server error:", err); // Log the error
       setErrors({ type: err.type, error: err as string });
     }
-  };
+  };  
   return (
-    <div className="py-24 w-full px-5">
-      <div className="max-w-xl space-y-8 mx-auto">
-        <div className="space-y-1 text-center">
-          <h1 className="text-4xl leading-[1.1] font-bold text-white">
-            welcome back! 👋
-          </h1>
-        </div>
 
         <form
           onSubmit={(e) => {
             e.preventDefault(); // Prevents the default form submission
             handleLogin(); // Calls your custom login function
           }}
-          className="bg-gray-800 rounded shadow-md px-11 py-8 space-y-6 max-w-md mx-auto"
+          className="space-y-6 transition"
         >
-          <div className="w-full">
-            <button className="py-3 px-6 gap-4 flex flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-zinc-300 w-full divide-x divide-gray-800">
+          <div className="w-full flex gap-4 flex-1">
+            <Link href='http://localhost:5000/api/auth/google' className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-zinc-300 w-full divide-x divide-gray-800">
               <Image
                 src="/icons/google.png"
                 alt=""
@@ -102,12 +108,16 @@ export default function Page() {
                 width={25}
                 className="object-contain"
               />
-              <div className="flex items-center justify-center flex-1 w-full">
-                <p className=" text-base font-medium text-gray-800">
-                  Sign in with Google
-                </p>
-              </div>
-            </button>
+            </Link>
+            <Link href='http://localhost:5000/api/auth/github' className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-zinc-300 w-full divide-x divide-gray-800">
+              <Image
+                src="/icons/github.png"
+                alt=""
+                height={25}
+                width={25}
+                className="object-contain"
+              />
+            </Link>
           </div>
 
           <div className="flex items-center w-full">
@@ -181,7 +191,5 @@ export default function Page() {
             </Link>
           </p>
         </form>
-      </div>
-    </div>
   );
 }
