@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-    --gray-800: rgb(37 40 44);
-    --purple-600: rgb(93,93,255);
+    --gray-800: #25282c;
+    --purple-600: #5d5dff;
     --purple-700: rgb(75,74,207);
     --purple-100: rgba(93, 93, 255, 0.1);
 }
