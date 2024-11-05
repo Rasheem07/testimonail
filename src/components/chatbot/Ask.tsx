@@ -72,12 +72,12 @@ export default function Ask({setpage}: Props) {
             </p>
           </div>
         </div>
-        <div className="p-2.5 rounded-3xl transition focus:border-purple-600 shadow-lg border border-zinc-300 bg-white w-full min-h-32">
+        <div className="p-2.5 rounded-3xl transition focus:border-purple-600 shadow-lg border border-gray-300 bg-white w-full min-h-32">
           <input
             type="email"
             autoFocus
             placeholder="example@email.com"
-            className="border-b border-zinc-300 text-sm w-full outline-none bg-transparent placeholder:font-sans placeholder:text-zinc-500 text-gray-800 py-2 px-2"
+            className="border-b border-gray-300 text-sm w-full outline-none bg-transparent placeholder:font-sans placeholder:text-zinc-500 text-gray-800 py-2 px-2"
           />
           <div className="flex w-full gap-1 items-end relative">
             <ReactTextareaAutosize

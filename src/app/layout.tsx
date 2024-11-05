@@ -2,9 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/headers/NavBar";
 import Footer from "@/components/footer";
-import { Toaster } from "@/components/ui/toaster"
+import { Toaster } from "@/components/ui/toaster";
+import ChatBotContextProvider from "@/contexts/ChatBotContext";
+import { Chatbot } from "@/components/chatbot";
+import { AuthProvider } from "@/contexts/authContext";
+import ReactQueryProvider from "@/contexts/reactqueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,9 +17,9 @@ export const metadata: Metadata = {
   description: "manage your testimonails with ease.",
   icons: {
     icon: {
-      url: '/favicon.ico'
-    }
-  }
+      url: "/favicon.ico",
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -32,13 +36,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, "bg-[rgb(21,23,25)] antialiased")}>
-        <div className="z-10 overlay bg-gray-800 opacity-75 fixed inset-x-0 inset-y-0 hidden blur-md  transition duration-200 ease-in" />
-        <NavBar />
-        {children}
-        <Toaster />
-        <Footer />
-      </body>
+      <ReactQueryProvider>
+        <AuthProvider>
+          <ChatBotContextProvider>
+            <body
+              className={cn(
+                inter.className,
+                "bg-[rgb(21,23,25)] antialiased relative"
+              )}
+            >
+              <NavBar />
+              {children}
+              <Toaster />
+              <Footer />
+              <Chatbot />
+            </body>
+          </ChatBotContextProvider>
+        </AuthProvider>
+      </ReactQueryProvider>
     </html>
   );
 }

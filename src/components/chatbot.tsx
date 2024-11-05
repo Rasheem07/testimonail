@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ArrowDown,
   ChevronDown,
@@ -15,15 +15,17 @@ import Home from "./chatbot/home";
 import Messages from "./chatbot/messages";
 import Help from "./chatbot/help";
 import Ask from "./chatbot/Ask";
+import { chatbotContext } from "@/contexts/ChatBotContext";
 
-interface ChatbotProps {
-  chatbot: React.ComponentState;
-  setchatbot: React.Dispatch<React.SetStateAction<React.ComponentState>>;
-}
 
-export const Chatbot: React.FC<ChatbotProps> = ({ chatbot, setchatbot }) => {
+
+export const Chatbot: React.FC = () => {
+
+  const context = useContext(chatbotContext);
+  const {isChatbot, setIsChatbot} = context;
+
   const openPopup = () => {
-    setchatbot(!chatbot);
+    setIsChatbot(!isChatbot);
   };
 
   const [page, setpage] = useState("home");
@@ -41,13 +43,13 @@ export const Chatbot: React.FC<ChatbotProps> = ({ chatbot, setchatbot }) => {
   return (
     <div
       className={`fixed ${
-        chatbot ? "inset-y-6" : "-bottom-11"
-      } right-5 z-[999]`}
+        isChatbot ? "inset-y-6" : "-bottom-11"
+      } right-5 z-[9999]`}
     >
       <div className="space-y-4 h-full pb-14">
         <div
-          className={`chatbot h-full ${
-            chatbot ? "" : "hidden"
+          className={`chatbot z-[99999] h-full ${
+            isChatbot ? "" : "hidden"
           } ease-in-out duration-[1.2s] transition animate-[pulse 2s ease] min-w-[85vw] max-w-[85vw] md:max-w-[30vw] md:min-w-[30vw] bg-white rounded-xl shadow-xl relative mr-4`}
         >
           {page === "home" ? (
@@ -110,12 +112,12 @@ export const Chatbot: React.FC<ChatbotProps> = ({ chatbot, setchatbot }) => {
             </div>
           )}
         </div>
-        <div className="flex w-full justify-end">
+        <div className="flex w-full justify-end cursor-pointer">
           <span
             onClick={openPopup}
             className=" transition flex items-center justify-center bg-purple-600 rounded-full shadow-md p-3"
           >
-            {!chatbot ? (
+            {!isChatbot ? (
               <MessageSquare className="h-7 w-7 text-white fill-white shadow-inner focus:scale-75 transition duration-[2.5s] ease-in" />
             ) : (
               <ChevronDown className="h-7 w-7 text-white fill-white shadow-inner focus:scale-75 transition duration-[2.5s] ease-out" />

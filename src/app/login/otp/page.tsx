@@ -1,7 +1,7 @@
 'use client'
 import OTPinput from "@/components/OTP";
 import { toast } from "@/hooks/use-toast";
-import { handleOTPsubmission } from "@/services/verify-otp";
+import { handleOTPsubmission } from "@/actions/verify-otp";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

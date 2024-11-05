@@ -1,9 +1,13 @@
+'use client'
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 export default function Footer() {
+  const path = usePathname();
+
   return (
-    <div className="px-4 sm:px-6 py-12 md:py-16 w-full max-w-7xl">
+    <div className={`px-4 sm:px-6 py-12 md:py-16 w-full max-w-7xl mx-auto ${path == '/dashboard/newspace'? 'hidden': ''}`}>
       <div className="grid md:grid-cols-12 gap-8 lg:gap-20">
         <div className="md:col-span-3 lg:col-span-4">
           <div className="flex flex-col gap-2">
