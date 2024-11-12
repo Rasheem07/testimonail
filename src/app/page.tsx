@@ -62,7 +62,7 @@ export default function Home() {
 
     (async () => {
       try {
-        const response = await fetch("http://localhost:5000/get/csrf-token", {
+        const response = await fetch("https://testimonial-server-kiqu.onrender.com/get/csrf-token", {
           method: "GET",
           credentials: "include", // Ensure cookies are included with the request
         });
