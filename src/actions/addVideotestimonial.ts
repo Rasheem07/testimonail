@@ -15,7 +15,7 @@ export const addVideoTestimonial = async (formData: VideoTestimonial) => {
   // Append the properties of formData to the FormData object
   appendToFormData(form, formData);
 
-  const response = await fetch(`http://localhost:5000/api/space/testimonials/video/add`, {
+  const response = await fetch(`${process.env.PROD_BASE_URL}/api/space/testimonials/video/add`, {
     method: "POST",
     headers: {
       "xsrf-token": cookies._csrf

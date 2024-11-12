@@ -16,7 +16,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   
   const fetchLoginStatus = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/auth/status', {
+      const response = await fetch(`${process.env.PROD_BASE_URL}/api/auth/status`, {
         credentials: 'include', // Include credentials to send the session cookie
       });
       if (response.status === 200) {

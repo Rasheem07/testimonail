@@ -1,7 +1,7 @@
 // getAlltextTestimonials(space_name);
 export const getallLikedTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `http://localhost:5000/api/space/testimonials/liked/${spacename}`,
+    `${process.env.PROD_BASE_URL}/api/space/testimonials/liked/${spacename}`,
     {
       method: "Get",
       cache: "default",
@@ -15,7 +15,7 @@ export const getallLikedTestimonials = async (spacename: string) => {
 
 export const HandleToggleLike = async (id: string) => {
   const response = await fetch(
-    `http://localhost:5000/api/space/testimonials/${id}/togglelike`,
+    `${process.env.PROD_BASE_URL}/api/space/testimonials/${id}/togglelike`,
     {
       method: "PUT",
       cache: "default",
