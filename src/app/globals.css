@@ -236,9 +236,17 @@ select::-ms-expand {
 
 
 .testimonial-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+/* Default to column layout */
+.testimonial-container.columns {
+  display: block;
   column-count: 2; /* Two columns */
   column-gap: 10px; /* Space between columns */
-  margin: 0 auto;
 }
 
 .testimonial-card {
@@ -249,8 +257,8 @@ select::-ms-expand {
 }
 
 /* Responsive adjustments */
-@media (max-width: 800px) {
-  .testimonial-container {
+@media (max-width: 1200px) {
+  .testimonial-container.columns {
     column-count: 1; /* Single column on smaller screens */
   }
 }

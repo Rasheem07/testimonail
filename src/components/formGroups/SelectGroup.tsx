@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import { cn } from "@/lib/utils";
 import { useFormContext } from "react-hook-form";
 

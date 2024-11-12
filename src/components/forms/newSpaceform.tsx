@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import SelectCollectExtra from "../formGroups/selectCollectExtra";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import Switch from "../ui/Switch";
 import ThemeSwitch from "../ui/themeSwitch";
 import InputGroup from "../formGroups/InputGroup";

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Checkbox from "../ui/checkbox";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import { useFormContext } from "react-hook-form";
 
 type Imageinputprops = {

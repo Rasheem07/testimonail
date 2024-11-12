@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import Switch from "../ui/Switch";
 
 type Props = {

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import Checkbox from "../ui/checkbox";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import Img from "next/image";
 import { useFormContext } from "react-hook-form";
 import { useFormError } from "@/hooks/useFormError";

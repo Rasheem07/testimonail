@@ -4,7 +4,8 @@ export const getAlltextTestimonials = async (spacename: string) => {
     {
       method: "Get",
       credentials: "include",
-    }
+      cache: 'default'
+    },
   );
 
   const json = await response.json();
@@ -19,6 +20,7 @@ export const getAllVideoTestimonials = async (spacename: string) => {
     {
       method: "Get",
       credentials: "include",
+      cache: "default"
     }
   );
 
@@ -33,7 +35,7 @@ export const getAllTestimonials = async (spacename: string) => {
     `http://localhost:5000/api/space/testimonials/${spacename}`,
     {
       method: "Get",
-      credentials: "include",
+      cache: 'default'
     }
   );
 

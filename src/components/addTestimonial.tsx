@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -10,8 +11,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Input from "@/components/ui/CustomInput";
-import Label from "@/components/ui/label";
-import { PencilLine, PencilOff, Star, Video } from "lucide-react";
+import Label from "@/components/ui/customlabel";
+import { PencilLine, PencilOff, Star, Text, Video } from "lucide-react";
 import Image from "next/image";
 import Switch from "./ui/Switch";
 import TextareaGroup from "./formGroups/TextareaGroup";
@@ -28,13 +29,18 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 import InputGroup from "./formGroups/InputGroup";
 import { addTestimonial } from "@/actions/addTestimonial";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { toast } from "@/hooks/use-toast";
+import { useProductContext } from "@/contexts/productContext";
+import { queryClient } from "@/contexts/reactqueryProvider";
 
 interface Props {
-  logo: string;
+  logo: string | StaticImport;
   space_name: string;
   dropwdown?: string;
+  hiddenButton?: boolean;
 }
-export function Addtestimonial({ logo, space_name }: Props) {
+export function Addtestimonial({ logo, space_name, hiddenButton }: Props) {
   const [imagetype, setimagetype] = useState("file");
   const [userimagetype, setuserimagetype] = useState("file");
 
@@ -72,9 +78,21 @@ export function Addtestimonial({ logo, space_name }: Props) {
   }, [errors]);
 
   const onSubmit: SubmitHandler<any> = async (data) => {
-    console.log("Form Data:", data);
-
-    await addTestimonial(data);
+    const response = await addTestimonial(data);
+    if (response.error) {
+      toast({
+        title: response.error,
+        description: "Please try again",
+        variant: "destructive",
+      });
+    } else if (response.json) {
+      await queryClient.invalidateQueries('testimonials');
+      toast({
+        title: "text testimonial added successfully!",
+        description: "You can view your testimonials at product page.",
+        variant: "default",
+      });
+    }
   };
 
   const handleFileChange = (
@@ -89,14 +107,24 @@ export function Addtestimonial({ logo, space_name }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="bg-purple-600 text-zinc-100 py-2 px-4 text-sm rounded-md shadow-md flex items-center gap-1.5 hover:opacity-90 border-none"
-        >
-          <PencilLine className="h-5 w-5" />
-          Add text
-        </Button>
+      <DialogTrigger className="w-full">
+        {hiddenButton ? (
+          <div className="w-full flex items-center gap-1.5 px-4 py-2 hover:bg-gray-700 cursor-pointer transition duration-150">
+            <Text className="h-4 w-4 text-zinc-200 hover:text-gray-800" />
+            <span className="text-zinc-200 hover:text-gray-100">
+              Add a text
+            </span>
+          </div>
+        ) : (
+          <span
+            className={`bg-purple-600 text-zinc-100  ${
+              hiddenButton ? "hidden" : "flex"
+            } py-2 px-4 text-sm rounded-md shadow-md items-center gap-1.5 hover:opacity-90 border-none`}
+          >
+            <PencilLine className="h-5 w-5" />
+            Add text
+          </span>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-scroll space-y-3">
         <DialogHeader className="space-y-3">
@@ -202,7 +230,9 @@ export function Addtestimonial({ logo, space_name }: Props) {
             </div>
           </div>
         </form>
-        <Button type="submit" onClick={handleSubmit(onSubmit)}>Save changes</Button>
+        <Button type="submit" onClick={handleSubmit(onSubmit)}>
+          Save changes
+        </Button>
       </DialogContent>
     </Dialog>
   );

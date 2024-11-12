@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import ReactTextareaAutosize from 'react-textarea-autosize';
 import { useFormContext } from "react-hook-form";
 import { useFormError } from "@/hooks/useFormError";

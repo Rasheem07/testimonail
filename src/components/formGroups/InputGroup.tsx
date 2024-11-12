@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import { FieldError, FieldErrors, useFormContext } from "react-hook-form";
 import { FormData } from "@/lib/validations";
 import { cn } from "@/lib/utils";

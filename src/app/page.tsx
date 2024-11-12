@@ -32,14 +32,18 @@ import { useAuth } from "@/contexts/authContext";
 
 const fetchasync = async (fetchLoginStatus: any) => {
   await fetchLoginStatus();
-}
+};
 
 export default function Home() {
   const playbuttonref = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [status, setstatus] = useState(
+    typeof window != "undefined" &&
+      localStorage.getItem("isLoggedIn") === "true"
+  );
 
   const context = useContext(chatbotContext);
-  const {isChatbot, setIsChatbot} = context;
+  const { isChatbot, setIsChatbot } = context;
 
   const router = useRouter();
 
@@ -50,30 +54,26 @@ export default function Home() {
       videoRef.current?.pause();
     }
   };
-  
-  const status = useLoginStatus();
 
   useEffect(() => {
-
-    if(status){
-      router.push('/dashboard')
+    if (status) {
+      router.push("/dashboard");
     }
 
-      (async () => {
-        try {
-          const response = await fetch("http://localhost:5000/get/csrf-token", {
-            method: "GET",
-            credentials: 'include', // Ensure cookies are included with the request
-          });
-  
-          if (!response.ok) {
-            throw new Error('Failed to fetch CSRF token');
-          }
-  
-        } catch (error) {
-          console.error('Error fetching CSRF token:', error);
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:5000/get/csrf-token", {
+          method: "GET",
+          credentials: "include", // Ensure cookies are included with the request
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch CSRF token");
         }
-      })();
+      } catch (error) {
+        console.error("Error fetching CSRF token:", error);
+      }
+    })();
 
     const handlePlay = () => {
       if (playbuttonref.current) {
@@ -96,7 +96,7 @@ export default function Home() {
       videoElement?.removeEventListener("play", handlePlay);
       videoElement?.removeEventListener("pause", handlePause);
     };
-  }, [ ,router, status]);
+  }, [, router, status]);
 
   const openChatbot = () => {
     setIsChatbot(true);
@@ -497,7 +497,6 @@ export default function Home() {
       </div>
 
       <PricingCta />
-
     </main>
   );
 }

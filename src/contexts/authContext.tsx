@@ -21,15 +21,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       });
       if (response.status === 200) {
         localStorage.setItem('isLoggedIn', 'true');
-      } else {
+      } else if(response.status === 401) {
         localStorage.removeItem('isLoggedIn');
         router.push('/login'); // Redirect to login page
       }
       
     } catch (error) {
       console.error('Error checking login status:', error);
-      localStorage.removeItem('isLoggedIn');
-      router.push('/login'); // Redirect to login page
     }
   }, [router]);
 

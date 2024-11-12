@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Checkbox from "../ui/checkbox";
-import Label from "../ui/label";
+import Label from "../ui/customlabel";
 import Image from "next/image";
 import Input from "../ui/CustomInput";
 import ReactTextareaAutosize from "react-textarea-autosize";

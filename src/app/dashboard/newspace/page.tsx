@@ -1,7 +1,7 @@
 "use client";
 import NotificationsPage from "@/components/cards/NotificationsPage";
 import Testimonail_page from "@/components/cards/testiomialPage";
-import ThankYouPage from "@/components/cards/thankYouPage";
+import ThankYouPage from "@/components/chatbot/thankYouPage";
 import ExtraSettingsForm from "@/components/forms/ExtraSettingsForm";
 import NewSpaceform from "@/components/forms/newSpaceform";
 import ThankyouPageForm from "@/components/forms/ThankyouPageForm";

@@ -1,9 +1,11 @@
 export interface TestimonialProps {
+  id: string;
   type: "video" | "text";
   name: string;
   date: string;
   ratings: number;
   content?: string; // Content for text testimonials
+  is_liked: boolean;
   video_url?: string; // URL for video testimonials
   user_photo?: string; // User photo for text testimonials
 }
