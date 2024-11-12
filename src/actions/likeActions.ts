@@ -1,7 +1,7 @@
 // getAlltextTestimonials(space_name);
 export const getallLikedTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `${process.env.PROD_BASE_URL}/api/space/testimonials/liked/${spacename}`,
+    `https://testimonial-server-kiqu.onrender.com/api/space/testimonials/liked/${spacename}`,
     {
       method: "Get",
       cache: "default",
@@ -15,7 +15,7 @@ export const getallLikedTestimonials = async (spacename: string) => {
 
 export const HandleToggleLike = async (id: string) => {
   const response = await fetch(
-    `${process.env.PROD_BASE_URL}/api/space/testimonials/${id}/togglelike`,
+    `https://testimonial-server-kiqu.onrender.com/api/space/testimonials/${id}/togglelike`,
     {
       method: "PUT",
       cache: "default",

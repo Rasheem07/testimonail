@@ -3,7 +3,7 @@ import { useQuery } from "react-query"
 
 export const fetchSpaceData = async (space_name: string): Promise<TestimonialSpaceData | null> => {
 
-    const response = await fetch(`${process.env.PROD_BASE_URL}/api/space/get/${space_name}`, {
+    const response = await fetch(`https://testimonial-server-kiqu.onrender.com/api/space/get/${space_name}`, {
         method: "GET", 
         headers: {
             "Content-Type": "application/json"
