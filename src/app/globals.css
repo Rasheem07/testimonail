@@ -4,10 +4,33 @@
 
 :root {
     --gray-800: #25282c;
+    --gray-700: rgb(51,54,58); 
     --purple-600: #5d5dff;
     --purple-700: rgb(75,74,207);
     --purple-100: rgba(93, 93, 255, 0.1);
 }
+
+/* Custom Scrollbar for WebKit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+  height: 8px; /* Set the height of the scrollbar for horizontal scrolling */
+}
+
+::-webkit-scrollbar-track {
+  background: #ccc; /* Track color */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #333, #333); /* Lightning style color gradient */
+  border-radius: 10px; /* Rounded corners for the thumb */
+  transition: background 0.3s ease; /* Smooth transition for thumb color */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--purple-700), var(--purple-100)); /* Darker gradient on hover */
+}
+
 
 .masonry-grid {
     display: grid;
@@ -151,4 +174,91 @@
   body {
     @apply bg-background text-foreground;
     }
+}
+
+/* styles.css */
+.responsive-iframe {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+}
+
+.responsive-iframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.bg-dashboard {
+  background: radial-gradient(#d7e0ea 18.75%, transparent 0) 2px 2px / 10px 10px #ecf0f5;
+  background-image: radial-gradient(#d7e0ea 18.75%, transparent 0);
+  background-position-x: 2px;
+  background-position-y: 2px;
+  background-size: 10px 10px;
+  background-repeat: initial;
+  background-attachment: scroll;
+  background-origin: padding-box;
+  background-origin: initial;
+  background-clip: border-box;
+  background-clip: initial;
+  background-color: #ecf0f5;
+}
+
+select {
+  -webkit-appearance: none;  /* Safari and Chrome */
+  -moz-appearance: none;     /* Firefox */
+  appearance: none;
+  background-image: url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIGZpbGw9J25vbmUnIHZpZXdCb3g9JzAgMCAyMCAyMCc+PHBhdGggc3Ryb2tlPScjNzA3RDg2JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIHN0cm9rZS1saW5lam9pbj0ncm91bmQnIHN0cm9rZS13aWR0aD0nMS41JyBkPSdNNiA4bDQgNCA0LTQnLz48L3N2Zz4=);
+  background-position: right .5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  print-color-adjust: exact;
+}
+
+select::-ms-expand {
+  display: none; /* Remove default arrow in IE */
+}
+
+.line-clamp3 {
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.testimonial-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+/* Default to column layout */
+.testimonial-container.columns {
+  display: block;
+  column-count: 2; /* Two columns */
+  column-gap: 10px; /* Space between columns */
+}
+
+.testimonial-card {
+  break-inside: avoid; /* Prevent card from breaking inside columns */
+  margin-bottom: 10px; /* Space between rows */
+  display: inline-block; /* Allow items to flow correctly in columns */
+  width: 100%; /* Make sure cards take full width of column */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .testimonial-container.columns {
+    column-count: 1; /* Single column on smaller screens */
+  }
 }

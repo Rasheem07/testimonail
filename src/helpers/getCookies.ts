@@ -1,6 +1,7 @@
 interface cookiesType {
   csrfToken: string;
   _csrf: string;
+  accessToken: string;
 }
 
 export function getCookies() {

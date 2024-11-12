@@ -2,11 +2,12 @@
 import LoadingSpinner from "@/components/ui/loader";
 import { getCookies } from "@/helpers/getCookies";
 import { useToast } from "@/hooks/use-toast";
-import { sendOTP } from "@/services/sendOTP";
+import { sendOTP } from "@/actions/sendOTP";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
+import { useLoginStatus } from "@/hooks/useLoginStatus";
 
 interface Errortype {
   type: string;
@@ -24,7 +25,12 @@ export default function Page() {
   const [errors, setErrors] = useState({ type: "", error: "" });
   const [message, setmessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const status = useLoginStatus();
+  
   useEffect(() => {
+    if (status) {
+      router.push("/dashboard");
+    }
     if (errors && errors.error) {
       toast({
         variant: "destructive",
@@ -36,7 +42,7 @@ export default function Page() {
         description: message,
       });
     }
-  }, [errors, toast, message]);
+  }, [errors, toast, message, router, status]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -111,14 +117,17 @@ export default function Page() {
           className="space-y-6  transition duration-500 ease-in-out"
         >
           <p className="flex items-start text-base text-zinc-300 font-sans">
-            <input required type="checkbox" className="h-4 w-4 mt-1 mr-2" />{" "}
-            {"  "}I agree to the Testimonial Terms of Service and I&apos;m aware
-            my personal data is processed in accordance with our Privacy Policy.
+            <input required type="checkbox" className="h-4 w-4 mt-1 mr-2" /> I
+            agree to the Testimonial Terms of Service and I&apos;m aware my
+            personal data is processed in accordance with our Privacy Policy.
             Please read it carefully.
           </p>
 
           <div className="w-full flex gap-4 flex-1">
-            <Link href='http://localhost:5000/api/auth/google' className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-zinc-300 w-full divide-x divide-gray-800">
+            <Link
+              href="http://localhost:5000/api/auth/google"
+              className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-gray-300 w-full divide-x divide-gray-800"
+            >
               <Image
                 src="/icons/google.png"
                 alt=""
@@ -127,7 +136,10 @@ export default function Page() {
                 className="object-contain"
               />
             </Link>
-            <Link href='http://localhost:5000/api/auth/github' className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-zinc-300 w-full divide-x divide-gray-800">
+            <Link
+              href="http://localhost:5000/api/auth/github"
+              className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-gray-300 w-full divide-x divide-gray-800"
+            >
               <Image
                 src="/icons/github.png"
                 alt=""
@@ -160,7 +172,7 @@ export default function Page() {
               required
               type="text"
               id="first_name"
-              className="rounded-sm shadow-md border border-zinc-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
+              className="rounded-sm shadow-md border border-gray-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
               placeholder="Enter your first name:"
             />
           </div>
@@ -179,7 +191,7 @@ export default function Page() {
               required
               type="email"
               id="first_name"
-              className="rounded-sm shadow-md border border-zinc-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
+              className="rounded-sm shadow-md border border-gray-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
               placeholder="Enter your eamil:"
             />
           </div>
@@ -198,7 +210,7 @@ export default function Page() {
               required
               type="password"
               id="first_name"
-              className="rounded-sm shadow-md border border-zinc-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
+              className="rounded-sm shadow-md border border-gray-300 text-gray-800 px-4 py-2 placeholder:text-zinc-500 outline-none"
               placeholder="Enter your password:"
             />
           </div>
