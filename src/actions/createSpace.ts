@@ -22,7 +22,7 @@ export const createSpace = async (formData: dataType) => {
     console.log(`${key}:`, value);
   }
 
-  const response = await fetch("https://testimonial-server-kiqu.onrender.com/api/space/createspace", {
+  const response = await fetch("https://testimonial-server-production.up.railway.app/api/space/createspace", {
     method: "POST",
     headers: {
       "xsrf-token": cookies._csrf,

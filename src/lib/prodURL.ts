@@ -1,1 +1,1 @@
-export const PROD_BASE_URL = "https://testimonial-server-kiqu.onrender.com"
+export const PROD_BASE_URL = "https://testimonial-server-production.up.railway.app"
