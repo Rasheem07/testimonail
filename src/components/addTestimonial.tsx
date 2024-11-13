@@ -33,6 +33,8 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { toast } from "@/hooks/use-toast";
 import { useProductContext } from "@/contexts/productContext";
 import { queryClient } from "@/contexts/reactqueryProvider";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTestimonials } from "@/app/actions";
 
 interface Props {
   logo: string | StaticImport;
@@ -86,12 +88,14 @@ export function Addtestimonial({ logo, space_name, hiddenButton }: Props) {
         variant: "destructive",
       });
     } else if (response.json) {
-      await queryClient.invalidateQueries('testimonials');
+      await queryClient.invalidateQueries("testimonials");
       toast({
         title: "text testimonial added successfully!",
         description: "You can view your testimonials at product page.",
         variant: "default",
       });
+      await revalidateTestimonials();
+      // await fetch(`/api/revalidate-testimonials?space_name=rasheem&secret=rasheem123`, {method: "POST"});
     }
   };
 

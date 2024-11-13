@@ -20,7 +20,7 @@ export const addTestimonial = async (formData: TextTestimonial) => {
     console.log(`${key}:`, value);
   }
 
-  const response = await fetch(`https://testimonial-server-kiqu.onrender.com/api/space/testimonials/text/add`, {
+  const response = await fetch(`http://localhost:5000/api/space/testimonials/text/add`, {
     method: "POST",
     headers: {
       "xsrf-token": cookies._csrf

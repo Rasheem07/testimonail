@@ -10,11 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    staleTimes: {
-      dynamic: 30,
-    },
-  },
+  reactStrictMode: true,
 };
 
 export default nextConfig;
