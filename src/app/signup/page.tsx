@@ -58,7 +58,7 @@ export default function Page() {
     console.log(cookies);
     setIsLoading(true); // Add this line
     try {
-      const response = await fetch("https://testimonial-server-production.up.railway.app/api/auth/register", {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export default function Page() {
 
           <div className="w-full flex gap-4 flex-1">
             <Link
-              href="https://testimonial-server-production.up.railway.app/api/auth/google"
+              href="http://localhost:5000/api/auth/google"
               className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-gray-300 w-full divide-x divide-gray-800"
             >
               <Image
@@ -137,7 +137,7 @@ export default function Page() {
               />
             </Link>
             <Link
-              href="https://testimonial-server-production.up.railway.app/api/auth/github"
+              href="http://localhost:5000/api/auth/github"
               className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-gray-300 w-full divide-x divide-gray-800"
             >
               <Image

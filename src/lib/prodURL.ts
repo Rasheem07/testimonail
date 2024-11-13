@@ -1,1 +1,1 @@
-export const PROD_BASE_URL = "https://testimonial-server-production.up.railway.app"
+export const PROD_BASE_URL = "http://localhost:5000"

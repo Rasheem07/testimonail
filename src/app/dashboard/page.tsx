@@ -141,6 +141,7 @@ export default function Page({}: Props) {
               {spaces?.data?.map((space: any) => (
                 <Link 
                   href={`/products/${space.space_name}`}
+                  prefetch={false}
                   aria-label={space?.space_name}
                   className="p-8 hover:bg-zinc-800 transition-colors hover:border-gray-400 bg-gray-800 rounded-lg space-y-8 border-gray-700 border"
                   key={space?.space_id}

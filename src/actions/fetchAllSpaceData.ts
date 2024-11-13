@@ -1,7 +1,7 @@
 
 export const fetchallSpaceData = async () => {
 
-    const response = await fetch('https://testimonial-server-production.up.railway.app/api/space/getall', {
+    const response = await fetch('http://localhost:5000/api/space/getall', {
         method: "GET", 
         headers: {
             "Content-Type": "application/json"
@@ -16,7 +16,7 @@ export const fetchallSpaceData = async () => {
 
 export const fetchallSpace = async () => {
 
-    const response = await fetch('https://testimonial-server-production.up.railway.app/api/space', {
+    const response = await fetch('http://localhost:5000/api/space', {
         method: "GET", 
         headers: {
             "Content-Type": "application/json"

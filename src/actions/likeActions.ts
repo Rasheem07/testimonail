@@ -1,7 +1,7 @@
 // getAlltextTestimonials(space_name);
 export const getallLikedTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `https://testimonial-server-production.up.railway.app/api/space/testimonials/liked/${spacename}`,
+    `http://localhost:5000/api/space/testimonials/liked/${spacename}`,
     {
       method: "Get",
       cache: "default",
@@ -15,7 +15,7 @@ export const getallLikedTestimonials = async (spacename: string) => {
 
 export const HandleToggleLike = async (id: string) => {
   const response = await fetch(
-    `https://testimonial-server-production.up.railway.app/api/space/testimonials/${id}/togglelike`,
+    `http://localhost:5000/api/space/testimonials/${id}/togglelike`,
     {
       method: "PUT",
       cache: "default",

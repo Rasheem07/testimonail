@@ -1,11 +1,11 @@
 export const getAlltextTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `https://testimonial-server-production.up.railway.app/api/space/testimonials/text/${spacename}`,
+    `http://localhost:5000/api/space/testimonials/text/${spacename}`,
     {
       method: "Get",
       credentials: "include",
-      cache: 'default'
-    },
+      cache: "default",
+    }
   );
 
   const json = await response.json();
@@ -16,11 +16,11 @@ export const getAlltextTestimonials = async (spacename: string) => {
 // getAlltextTestimonials(space_name);
 export const getAllVideoTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `https://testimonial-server-production.up.railway.app/api/space/testimonials/video/${spacename}`,
+    `http://localhost:5000/api/space/testimonials/video/${spacename}`,
     {
       method: "Get",
       credentials: "include",
-      cache: "default"
+      cache: "default",
     }
   );
 
@@ -32,10 +32,11 @@ export const getAllVideoTestimonials = async (spacename: string) => {
 // getAlltextTestimonials(space_name);
 export const getAllTestimonials = async (spacename: string) => {
   const response = await fetch(
-    `https://testimonial-server-production.up.railway.app/api/space/testimonials/${spacename}`,
+    `http://localhost:5000/api/space/testimonials/${spacename}`,
     {
       method: "Get",
-      cache: 'default'
+      cache: "default",
+      next: { tags: ["testimonials"] },
     }
   );
 
