@@ -21,6 +21,7 @@ import { toast } from "@/hooks/use-toast";
 import StarRating from "./ui/starRating";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { queryClient } from "@/contexts/reactqueryProvider";
+import { revalidateTestimonials } from "@/app/actions";
 
 interface Props {
   logo: string | StaticImport;
@@ -56,13 +57,13 @@ export function AddVideotestimonial({ logo, space_name, hiddenButton }: Props) {
         description: "Please try again",
         variant: "destructive",
       });
-    } else if (response.json) {
-      await queryClient.invalidateQueries('testimonials');
+    } else if(response.json) {
       toast({
         title: "text testimonial added successfully!",
         description: "You can view your testimonials at product page.",
         variant: "default",
       });
+      await revalidateTestimonials()
       setIsOpen(false); // Close the dialog
     }
   };

@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import Label from "../ui/customlabel";
-import Switch from "../ui/Switch";
+import Switch from "../ui/FormSwitch";
 
 type Props = {
     label: string;

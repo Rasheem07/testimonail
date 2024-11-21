@@ -7,9 +7,11 @@ import { Suspense, useEffect, useState } from "react";
 import LoadingSpinner from "@/components/ui/loader";
 
 export default function Page() {
+  return (
   <Suspense fallback={<LoadingSpinner />}>
     <OTPcomponent />
-  </Suspense>;
+  </Suspense>
+  )
 }
 
 function OTPcomponent() {

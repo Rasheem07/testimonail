@@ -14,7 +14,7 @@ import Input from "@/components/ui/CustomInput";
 import Label from "@/components/ui/customlabel";
 import { PencilLine, PencilOff, Star, Text, Video } from "lucide-react";
 import Image from "next/image";
-import Switch from "./ui/Switch";
+import Switch from "./ui/FormSwitch";
 import TextareaGroup from "./formGroups/TextareaGroup";
 import {
   Select,
@@ -33,6 +33,8 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { toast } from "@/hooks/use-toast";
 import { useProductContext } from "@/contexts/productContext";
 import { queryClient } from "@/contexts/reactqueryProvider";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTestimonials } from "@/app/actions";
 
 interface Props {
   logo: string | StaticImport;
@@ -86,7 +88,10 @@ export function Addtestimonial({ logo, space_name, hiddenButton }: Props) {
         variant: "destructive",
       });
     } else if (response.json) {
-      await queryClient.invalidateQueries('testimonials');
+      await queryClient.invalidateQueries("testimonials");
+      setTimeout(async () => {
+        await queryClient.invalidateQueries("testimonials");
+      }, 5000);
       toast({
         title: "text testimonial added successfully!",
         description: "You can view your testimonials at product page.",

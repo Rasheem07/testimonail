@@ -3,6 +3,7 @@ import { fetchallSpaceData } from "@/actions/fetchAllSpaceData";
 import OverviewCard from "@/components/cards/overview";
 import Input from "@/components/ui/CustomInput";
 import LoadingSpinner from "@/components/ui/loader";
+import { useAuth } from "@/contexts/authContext";
 import { useLoginStatus } from "@/hooks/useLoginStatus";
 import {
   Briefcase,
@@ -28,7 +29,11 @@ export default function Page({}: Props) {
     setIsPopup(!isPopup);
   };
 
-  const { data: spaces, isLoading, error } = useQuery('spaceData', fetchallSpaceData, {
+  const {
+    data: spaces,
+    isLoading,
+    error,
+  } = useQuery("spaceData", fetchallSpaceData, {
     staleTime: 5 * 60 * 1000, // 5 minutes
     cacheTime: 30 * 60 * 1000, // 30 minutes
     refetchOnWindowFocus: false, // Disable refetch on window focus
@@ -36,12 +41,11 @@ export default function Page({}: Props) {
 
   const router = useRouter();
 
-  const status = useLoginStatus();
-   useEffect(() => {
-    if(!status){
+  const {LoginStatus} = useAuth();
+  useEffect(() => {
+    if(!LoginStatus) 
       router.push('/login')
-    }
-   }, [router, status]);
+  }, [router, LoginStatus]);
 
   return (
     <main className="mx-auto w-full max-w-screen-xl px-5 md:px-20 md:py-20 space-y-12 md:space-y-20 overflow-x-hidden">
@@ -109,7 +113,8 @@ export default function Page({}: Props) {
                 isPopup ? "flex" : "hidden"
               }`}
             >
-              <Link href='/dashboard/newspace'
+              <Link
+                href="/dashboard/newspace"
                 className="py-2.5 px-4 hover:bg-[rgb(21,23,25)] transition-colors cursor-pointer rounded-md flex items-center gap-1.5"
               >
                 <Plus className="relative h-5 w-5 text-zinc-200" />
@@ -139,32 +144,7 @@ export default function Page({}: Props) {
             </div>
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 grid-flow-row gap-4">
               {spaces?.data?.map((space: any) => (
-                <Link 
-                  href={`/products/${space.space_name}`}
-                  aria-label={space?.space_name}
-                  className="p-8 hover:bg-zinc-800 transition-colors hover:border-gray-400 bg-gray-800 rounded-lg space-y-8 border-gray-700 border"
-                  key={space?.space_id}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2.5 max-w-[calc(100%-32px)]">
-                      <Image
-                        src={space.logo}
-                        alt=""
-                        width={42}
-                        height={42}
-                        className="rounded-[9999px]"
-                      />
-                      <h2 className="text-base font-medium text-zinc-100 truncate">
-                        {space.space_name}
-                      </h2>
-                    </div>
-                    <MoreHorizontalIcon className="min-h-8 min-w-8 text-zinc-200 hover:bg-zinc-700 rounded-md p-1 hover:shadow-inner transition-colors" />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <p className="text-base font-medium text-zinc-300">Videos: {space?.video_testimonials?.length}</p>
-                    <p className="text-base font-medium text-zinc-300">Text: {space?.text_testimonials?.length}</p>
-                  </div>
-                </Link> // Assuming each space has an id and name
+                <SpaceLink space={space} key={space.space_name} />
               ))}
             </div>
           </div>
@@ -187,3 +167,45 @@ export default function Page({}: Props) {
     </main>
   );
 }
+
+// Create a memoized SpaceLink component
+// eslint-disable-next-line react/display-name
+const SpaceLink = React.memo(({ space }: { space: any }) => {
+
+  const [loadingLink, setloadingLink] = useState([]);
+  
+  return (
+    <Link
+      href={`/products/${space.space_name}`}
+      aria-label={space?.space_name}
+      prefetch
+      className="p-8 hover:bg-zinc-800 transition-colors hover:border-gray-400 bg-gray-800 rounded-lg space-y-8 border-gray-700 border"
+    >
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5 max-w-[calc(100%-32px)]">
+          <Image
+            src={space.logo}
+            alt=""
+            width={42}
+            height={42}
+            className="rounded-[9999px]"
+            loading="lazy"
+            quality={75}
+          />
+          <h2 className="text-base font-medium text-zinc-100 truncate">
+            {space.space_name}
+          </h2>
+        </div>
+        <MoreHorizontalIcon className="min-h-8 min-w-8 text-zinc-200 hover:bg-zinc-700 rounded-md p-1 hover:shadow-inner transition-colors" />
+      </div>
+      <div className="flex items-center justify-between">
+        <p className="text-base font-medium text-zinc-300">
+          Videos: {space?.video_testimonials?.length}
+        </p>
+        <p className="text-base font-medium text-zinc-300">
+          Text: {space?.text_testimonials?.length}
+        </p>
+      </div>
+    </Link>
+  );
+});

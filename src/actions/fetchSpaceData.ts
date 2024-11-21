@@ -1,14 +1,14 @@
 import { TestimonialSpaceData } from "@/types/spacetype";
 import { useQuery } from "react-query"
 
-export const fetchSpaceData = async (space_name: string): Promise<TestimonialSpaceData | null> => {
+export const fetchSpaceData = async (space_name: string): Promise<TestimonialSpaceData> => {
 
-    const response = await fetch(`https://testimonial-server-kiqu.onrender.com/api/space/get/${space_name}`, {
+    const response = await fetch(`http://localhost:5000/api/space/get/${space_name}`, {
         method: "GET", 
         headers: {
             "Content-Type": "application/json"
         },
-        cache: 'default'
+        cache: 'force-cache'
     });
 
     const json = await response.json();

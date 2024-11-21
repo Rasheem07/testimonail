@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, ReactEventHandler, useEffect, useState } from "react";
 import { useLoginStatus } from "@/hooks/useLoginStatus";
+import { useAuth } from "@/contexts/authContext";
 
 interface Errortype {
   type: string;
@@ -24,9 +25,9 @@ export default function Page() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const status = useLoginStatus();
+  const {LoginStatus} = useAuth();
   useEffect(() => {
-    if(status){
+    if(LoginStatus) {
       router.push('/dashboard')
     }
     if (errors && errors.error) {
@@ -40,7 +41,7 @@ export default function Page() {
         description: message
       });
     }
-  }, [errors, toast, message, status, router]);
+  }, [errors, toast, message, LoginStatus, router]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -56,14 +57,13 @@ export default function Page() {
     const cookies = getCookies();
     console.log(cookies); // Add this line
     try {
-      const response = await fetch("https://testimonial-server-kiqu.onrender.com/api/auth/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "xsrf-token": cookies._csrf, 
         },
         credentials: "include",
-        mode: "cors",
         body: JSON.stringify(formData),
       });
 
@@ -115,7 +115,7 @@ export default function Page() {
       className="space-y-6 transition"
     >
       <div className="w-full flex gap-4 flex-1">
-        <Link href='https://testimonial-server-kiqu.onrender.com/api/auth/google' className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-gray-300 w-full divide-x divide-gray-800">
+        <Link href='http://localhost:5000/api/auth/google' className="py-3 px-6 gap-4 flex justify-center flex-1 bg-zinc-50 hover:bg-zinc-100 rounded-sm border border-gray-300 w-full divide-x divide-gray-800">
           <Image
             src="/icons/google.png"
             alt=""
@@ -124,7 +124,7 @@ export default function Page() {
             className="object-contain"
           />
         </Link>
-        <Link href='https://testimonial-server-kiqu.onrender.com/api/auth/github' className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-gray-300 w-full divide-x divide-gray-800">
+        <Link href='http://localhost:5000/api/auth/github' className="py-3 px-6 gap-4 flex flex-1 justify-center rounded-sm border border-gray-300 w-full divide-x divide-gray-800">
           <Image
             src="/icons/github.png"
             alt=""

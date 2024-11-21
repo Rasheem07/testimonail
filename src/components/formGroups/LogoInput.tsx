@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Checkbox from "../ui/checkbox";
 import Label from "../ui/customlabel";
@@ -14,10 +14,21 @@ type Props = {
   formName: string;
 };
 
-export default function LogoInput({ label, labelIcon, check, name, formName }: Props) {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);;[]
+export default function LogoInput({
+  label,
+  labelIcon,
+  check,
+  name,
+  formName,
+}: Props) {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  [];
 
-  const { register, formState: { errors } } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+    setError,
+  } = useFormContext();
 
   const handleFileInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -26,8 +37,13 @@ export default function LogoInput({ label, labelIcon, check, name, formName }: P
       reader.onloadend = () => {
         const img = new Image();
         img.onload = () => {
+          if (img.width === 48 && img.height === 48) {
             const imageDataUrl = reader.result as string; // Ensure it's a string
             setImagePreview(imageDataUrl);
+          } else {
+            setError("logo", { message: "image must be 48 x 48" });
+            alert("Please upload an image with dimensions 48x48 pixels.");
+          }
         };
         img.src = reader.result as string; // Set image src for loading dimensions
       };
@@ -37,11 +53,11 @@ export default function LogoInput({ label, labelIcon, check, name, formName }: P
 
   const error = useFormError(formName, name);
 
-
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-x-2">
         <Label label={label} icon={labelIcon} />
+        48 x 48
         {check && (
           <div className="flex items-center gap-1">
             <Checkbox />
@@ -50,7 +66,10 @@ export default function LogoInput({ label, labelIcon, check, name, formName }: P
         )}
       </div>
       <div className="flex items-center gap-3">
-        <div id="preview" className="h-12 w-12 rounded-full border bg-slate-200">
+        <div
+          id="preview"
+          className="h-12 w-12 rounded-full border bg-slate-200"
+        >
           {imagePreview && (
             <Img
               height={48}
@@ -75,7 +94,9 @@ export default function LogoInput({ label, labelIcon, check, name, formName }: P
           />
         </button>
       </div>
-      {error && <div className="text-red-500 text-sm mt-1">{error?.message}</div>}
+      {error && (
+        <div className="text-red-500 text-sm mt-1">{error?.message}</div>
+      )}
     </div>
   );
 }

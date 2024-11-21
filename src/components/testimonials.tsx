@@ -2,13 +2,15 @@ import React from 'react';
 import TestimonialCard from './cards/TextCard';
 import { TestimonialProps } from '@/types/testimonials';
 
-const TestimonialsComponent = ({ testimonials }: { testimonials: TestimonialProps[] }) => {
+const TestimonialsComponent = ({ testimonials, space_name }: { testimonials: TestimonialProps[], space_name: string }) => {
   const isTwoCards = testimonials.length === 2;
   return (
-    <div className={`testimonial-container ${!isTwoCards && 'columns'}`}>
+    <div className={`testimonial-container  ${!isTwoCards && 'columns'}`}>
       {testimonials.map((testimonial, index) => (
         <div className="testimonial-card" key={index}>
           <TestimonialCard
+            is_archived={testimonial.is_archived}
+            space_name={space_name}
             id={testimonial.id}
             type={testimonial.type}
             name={testimonial.name}
