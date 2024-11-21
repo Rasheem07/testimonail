@@ -1,8 +1,14 @@
 'use server'
+
  
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
  
 export async function revalidateTestimonials() {
   // Invalidate the /posts route in the cache
-  revalidatePath('/products/rasheem')
+  await revalidateTag(`testimonials`);
+
+  setTimeout(async () => {
+   await revalidateTag(`testimonials`);
+  }, 5000);
+  console.log("testimonials revalidated.")
 }

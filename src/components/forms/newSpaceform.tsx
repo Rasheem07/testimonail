@@ -6,7 +6,7 @@ import {
 import React from "react";
 import SelectCollectExtra from "../formGroups/selectCollectExtra";
 import Label from "../ui/customlabel";
-import Switch from "../ui/Switch";
+import Switch from "../ui/FormSwitch";
 import ThemeSwitch from "../ui/themeSwitch";
 import InputGroup from "../formGroups/InputGroup";
 import QuestionInputContainer from "../formGroups/questionContainer";

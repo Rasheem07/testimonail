@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { ChangeEvent, ReactEventHandler, useEffect, useState } from "react";
 import { useLoginStatus } from "@/hooks/useLoginStatus";
+import { useAuth } from "@/contexts/authContext";
 
 interface Errortype {
   type: string;
@@ -24,9 +25,9 @@ export default function Page() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const status = useLoginStatus();
+  const {LoginStatus} = useAuth();
   useEffect(() => {
-    if(status){
+    if(LoginStatus) {
       router.push('/dashboard')
     }
     if (errors && errors.error) {
@@ -40,7 +41,7 @@ export default function Page() {
         description: message
       });
     }
-  }, [errors, toast, message, status, router]);
+  }, [errors, toast, message, LoginStatus, router]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

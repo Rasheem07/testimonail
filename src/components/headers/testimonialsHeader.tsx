@@ -28,6 +28,7 @@ import TextFormContextProvider from "@/contexts/textForm";
 import { TestimonialProps } from "@/types/testimonials";
 import VideoFormContextProvider from "@/contexts/videoFormContext";
 import { AddVideotestimonial } from "../addVideoTestimonial";
+import TagsDailog from "../tagsDailog";
 
 interface Props {
   logo: string | StaticImport;
@@ -102,12 +103,7 @@ export default function TestimonialsHeader({
               </VideoFormContextProvider>
               <div className="my-1 h-[1px] w-full bg-zinc-700" />
               <ExportButton data={testimonials} />
-              <div className="flex items-center gap-1.5 px-4 py-2 hover:bg-gray-700 cursor-pointer transition duration-150">
-                <Tag className="h-4 w-4 text-zinc-200 hover:text-gray-800" />
-                <span className="text-zinc-200 hover:text-gray-100">
-                  Manage tags
-                </span>
-              </div>
+              <TagsDailog hiddenButton/>
               <div className="flex items-center gap-1.5 px-4 py-2 hover:bg-gray-700 cursor-pointer transition duration-150">
                 <Edit className="h-4 w-4 text-zinc-200 hover:text-gray-800" />
                 <span className="text-zinc-200 hover:text-gray-100">

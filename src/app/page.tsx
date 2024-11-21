@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useContext, useEffect, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import Features from "@/components/features";
 import PricingCta from "@/components/pricingcta";
 import { Chatbot } from "@/components/chatbot";
@@ -34,13 +34,11 @@ const fetchasync = async (fetchLoginStatus: any) => {
   await fetchLoginStatus();
 };
 
-export default function Home() {
+function Home() {
   const playbuttonref = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [status, setstatus] = useState(
-    typeof window != "undefined" &&
-      localStorage.getItem("isLoggedIn") === "true"
-  );
+
+  const {LoginStatus} = useAuth()
 
   const context = useContext(chatbotContext);
   const { isChatbot, setIsChatbot } = context;
@@ -56,9 +54,11 @@ export default function Home() {
   };
 
   useEffect(() => {
-    if (status) {
-      router.push("/dashboard");
+    
+    if(LoginStatus) {
+      router.push('/dashboard')
     }
+ 
 
     (async () => {
       try {
@@ -96,7 +96,7 @@ export default function Home() {
       videoElement?.removeEventListener("play", handlePlay);
       videoElement?.removeEventListener("pause", handlePause);
     };
-  }, [, router, status]);
+  }, [, router, LoginStatus]);
 
   const openChatbot = () => {
     setIsChatbot(true);
@@ -500,3 +500,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default memo(Home)

@@ -3,7 +3,7 @@ import { ChevronDown, PlusCircle } from "lucide-react";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form"; // Import useFormContext
 import Checkbox from "../ui/checkbox";
-import Switch from "../ui/Switch";
+import Switch from "../ui/FormSwitch";
 
 interface DropdownItem {
   label: string;

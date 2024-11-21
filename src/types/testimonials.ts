@@ -6,8 +6,10 @@ export interface TestimonialProps {
   ratings: number;
   content?: string; // Content for text testimonials
   is_liked: boolean;
+  is_archived: boolean;
   video_url?: string; // URL for video testimonials
   user_photo?: string; // User photo for text testimonials
+  is_spam?: boolean;
 }
 
 export interface Testimonial {

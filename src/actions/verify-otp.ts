@@ -1,14 +1,14 @@
 import { getCookies } from "@/helpers/getCookies";
 
-export const handleOTPsubmission = async (email: string, otp: string) => {
-    const cookies = getCookies();
+export const handleOTPsubmission = async (email: string, OTP: string) => {
 
         const response = await fetch('http://localhost:5000/api/otp/verify', {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "xsrf-token": cookies._csrf,
           },
+          credentials: "include",
+          body: JSON.stringify({email, OTP})
         })
 
         const data = await response.json();

@@ -1,58 +1,49 @@
-"use client";
-import React, { ChangeEventHandler, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import React, { useState, ChangeEventHandler } from 'react';
 
-export default function Switch({
-  name,
-  formName,
-  onChange,
-}: {
-  name: string;
-  onChange?: ChangeEventHandler<HTMLInputElement>;
-  formName?: string;
-}) {
-  const [isChecked, setIsChecked] = useState(false);
+interface CustomSwitchProps {
+  onChange?: (checked: boolean) => void;
+  initialChecked?: boolean;
+  className?: string;
+}
+
+const CustomSwitch: React.FC<CustomSwitchProps> = ({ onChange, initialChecked = false, className = '', ...props }) => {
+  const [isChecked, setIsChecked] = useState(initialChecked);
 
   const handleSwitch = () => {
-    setIsChecked((prevChecked) => !prevChecked); // Toggle the state directly
-  };
-
-  const { register } = useFormContext();
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setIsChecked(e.target.checked);
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
     if (onChange) {
-      onChange(e);
+      onChange(newChecked);
     }
   };
 
-  const Inputregister = formName ? `${formName}.${name}` : `${name}`;
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const newChecked = e.target.checked;
+    setIsChecked(newChecked);
+    if (onChange) {
+      onChange(newChecked);
+    }
+  };
 
   return (
     <button
       type="button"
-      className={`relative inline-flex flex-shrink-0 ${
-        isChecked ? "bg-purple-600" : "bg-gray-200"
-      } shadow-inner rounded-full w-11 h-6 border-2 border-transparent transition-colors duration-200 ease-in-out`}
-      onClick={handleSwitch} // Move click handling to the button
+      className={`relative inline-flex flex-shrink-0 ${isChecked ? 'bg-purple-600' : 'bg-gray-300'} shadow-inner rounded-full w-11 h-6 border-2 border-transparent transition-colors duration-200 ease-in-out ${className}`}
+      onClick={handleSwitch}
+      {...props}
     >
       <input
-        type="checkbox" // Ensure the checkbox reflects the state
+        type="checkbox"
         className="w-11 h-6 absolute inset-0 opacity-0"
         aria-hidden="true"
-        {...register(Inputregister)}
-        checked={isChecked} // Synchronize state
-        onChange={handleChange} // Use the proper change handler
+        checked={isChecked}
+        onChange={handleChange}
       />
       <span
-        className={`relative inline-block h-5 w-5 bg-white shadow transform transition-transform duration-200 ease-in-out ${
-          isChecked ? "translate-x-5" : "translate-x-0"
-        } rounded-full`}
+        className={`relative inline-block h-5 w-5 bg-white shadow transform transition-transform duration-200 ease-in-out ${isChecked ? 'translate-x-5' : 'translate-x-0'} rounded-full`}
       >
         <span
-          className={`absolute inset-0 h-full w-full flex items-center justify-center transition-opacity duration-200 ${
-            isChecked ? "opacity-0" : "opacity-100"
-          }`}
+          className={`absolute inset-0 h-full w-full flex items-center justify-center transition-opacity duration-200 ${isChecked ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
         >
           <svg
@@ -70,9 +61,7 @@ export default function Switch({
           </svg>
         </span>
         <span
-          className={`absolute inset-0 h-full w-full flex items-center justify-center transition-opacity duration-200 ${
-            isChecked ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 h-full w-full flex items-center justify-center transition-opacity duration-200 ${isChecked ? 'opacity-100' : 'opacity-0'}`}
           aria-hidden="true"
         >
           <svg
@@ -86,4 +75,6 @@ export default function Switch({
       </span>
     </button>
   );
-}
+};
+
+export default CustomSwitch;

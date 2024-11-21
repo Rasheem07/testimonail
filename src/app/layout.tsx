@@ -37,22 +37,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReactQueryProvider>
-        <AuthProvider>
-          <ChatBotContextProvider>
-            <body
-              className={cn(
-                inter.className,
-                "bg-[rgb(21,23,25)] antialiased relative"
-              )}
-            >
-              <NavBar />
-              {children}
-              <Toaster />
-              <Footer />
-              <Chatbot />
-            </body>
-          </ChatBotContextProvider>
-        </AuthProvider>
+          <AuthProvider>
+            <ChatBotContextProvider>
+              <body
+                className={cn(
+                  inter.className,
+                  "bg-[rgb(21,23,25)] antialiased relative"
+                )}
+              >
+                <NavBar />
+                {children}
+                <Toaster />
+                <Footer />
+                <Chatbot />
+              </body>
+            </ChatBotContextProvider>
+          </AuthProvider>
       </ReactQueryProvider>
     </html>
   );

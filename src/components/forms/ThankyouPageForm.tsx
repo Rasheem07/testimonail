@@ -4,7 +4,7 @@ import Label from "../ui/customlabel";
 import Image from "next/image";
 import Input from "../ui/CustomInput";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import Switch from "../ui/Switch";
+import Switch from "../ui/FormSwitch";
 import {
   ArrowLeft,
   ArrowRight,

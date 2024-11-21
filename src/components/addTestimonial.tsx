@@ -14,7 +14,7 @@ import Input from "@/components/ui/CustomInput";
 import Label from "@/components/ui/customlabel";
 import { PencilLine, PencilOff, Star, Text, Video } from "lucide-react";
 import Image from "next/image";
-import Switch from "./ui/Switch";
+import Switch from "./ui/FormSwitch";
 import TextareaGroup from "./formGroups/TextareaGroup";
 import {
   Select,
@@ -89,13 +89,14 @@ export function Addtestimonial({ logo, space_name, hiddenButton }: Props) {
       });
     } else if (response.json) {
       await queryClient.invalidateQueries("testimonials");
+      setTimeout(async () => {
+        await queryClient.invalidateQueries("testimonials");
+      }, 5000);
       toast({
         title: "text testimonial added successfully!",
         description: "You can view your testimonials at product page.",
         variant: "default",
       });
-      await revalidateTestimonials();
-      // await fetch(`/api/revalidate-testimonials?space_name=rasheem&secret=rasheem123`, {method: "POST"});
     }
   };
 

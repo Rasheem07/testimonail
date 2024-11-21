@@ -20,7 +20,7 @@ export const getAllVideoTestimonials = async (spacename: string) => {
     {
       method: "Get",
       credentials: "include",
-      cache: "default",
+      cache: "force-cache",
     }
   );
 
@@ -36,7 +36,33 @@ export const getAllTestimonials = async (spacename: string) => {
     {
       method: "Get",
       cache: "default",
-      next: { tags: ["testimonials"] },
+      // next: {revalidate: 20}
+    }
+  );
+
+  const json = await response.json();
+
+  return json;
+};
+
+export const getSingleTextTestimonial = async (spacename: string, id: string) => {
+  const response = await fetch(
+    `http://localhost:5000/api/space/testimonials/text/${spacename}/${id}`,
+    {
+      method: "Get"
+    }
+  );
+
+  const json = await response.json();
+
+  return json;
+};
+
+export const getSingleVideoTestimonial = async (spacename: string, id: string) => {
+  const response = await fetch(
+    `http://localhost:5000/api/space/testimonials/video/${spacename}/${id}`,
+    {
+      method: "Get"
     }
   );
 
